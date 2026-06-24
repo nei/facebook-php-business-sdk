@@ -27,7 +27,7 @@ namespace FacebookAds\Http\Adapter\Curl;
 abstract class AbstractCurl implements CurlInterface {
 
   /**
-   * @var resource
+   * @var resource|\CurlHandle
    */
   protected $handle;
 
@@ -45,7 +45,7 @@ abstract class AbstractCurl implements CurlInterface {
   }
 
   public function __destruct() {
-    if (is_resource($this->handle)) {
+    if ($this->handle instanceof \CurlHandle || is_resource($this->handle)) {
       curl_close($this->handle);
     }
   }
